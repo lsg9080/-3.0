@@ -1,0 +1,40 @@
+body, html
+  line-height: 1
+  font-weight: 200
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif
+.dn
+  display: none
+.opacity0
+  opacity: 0
+input::placeholder, textarea::placeholder
+  color: #aaaaaa
+  font-size: 14px
+a, input, button, select, textarea
+  text-decoration: none
+  outline: none
+textarea
+  resize:none
+@font-face
+  font-family: Akrobat-ExtraBold
+  src: url('../../assets/Akrobatextrabold.woff.ttf')
+.clearfix
+  display: inline-block
+  &:after
+    display: block
+    content: "."
+    height: 0
+    line-height: 0
+    clear: both
+    visibility: hidden
+
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    &::after
+      -webkit-transform: scaleY(0.7)
+      transform: scaleY(0.7)
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    &::after
+      -webkit-transform: scaleY(0.5)
+      transform: scaleY(0.5)

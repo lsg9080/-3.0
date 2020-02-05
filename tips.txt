@@ -1,0 +1,8 @@
+﻿无特殊要求使用标准版本：  wx-sell-meal
+
+公众号是医院自己的，利用小程序做跳转，所以不能绑定开发者
+
+查看病人餐公众号 测试
+http://weixin.wincome.group/
+
+开发测试在 wxSellMealConfig目录下进行，有时间看一下区别
