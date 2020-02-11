@@ -1,0 +1,6 @@
+{
+    "webApi": "http://demobrc.wincome.group/patientOrderingNew.API",
+    "SApi": "http://demobrc.wincome.group/WeChatAPI_New",
+    "PApi": "http://192.172.1.50:5003",
+    "vConsole":false
+}

@@ -206,7 +206,7 @@ export default {
         // 获取星评评价项目列表
         GetOrderEvaluationItemList() {
             var _this = this
-            let url = this.api.userApi.GetOrderEvaluationItemList
+            let url = this.api.GetOrderEvaluationItemList
             let parmas = defaultParam('', 148)
             _this.$ajax
                 .post(url, _this.qs.stringify(parmas))
@@ -241,7 +241,7 @@ export default {
         //获取订餐明细
         GetOrderDetail() {
             var _this = this
-            let url = this.api.userApi.GetOrderDetail
+            let url = this.api.GetOrderDetail
             let addParmas = {
                 orderId: _this.orderId, //订单Id
                 mergeMenu: 0 //是否合并菜肴  1:合并   0:不合并
@@ -287,7 +287,7 @@ export default {
 		//获取订单评价内容
         GetOrderEvaluation() {
             var _this = this
-            let url = this.api.userApi.GetOrderEvaluation
+            let url = this.api.GetOrderEvaluation
             let addParmas = { orderId: _this.$route.query.orderId } //订单Id
             let dParam = defaultParam('', 149)
 			let parmas = Object.assign({}, dParam, addParmas)
@@ -351,7 +351,7 @@ export default {
         //提交
         submitEvaluate() {
             var _this = this
-            let url = this.api.userApi.OrderEvaluation
+            let url = this.api.OrderEvaluation
             let addParmas = {
                 orderId: _this.$route.query.orderId,
                 content: _this.textareaValue,

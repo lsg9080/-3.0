@@ -46,7 +46,7 @@ export default {
         this.m = m
         console.log(m)
         //测试分享
-        let url = this.api.userApi.GetSignature
+        let url = this.api.GetSignature
         let authCode = encryption('wx_wincome', 306)
         let params = {
             authCode: authCode,
@@ -124,7 +124,7 @@ export default {
         },
         UnboundBtn() {
             var _this = this
-            let url = this.api.userApi.BindingDelete
+            let url = this.api.BindingDelete
             let parmas = defaultParam('', 120)
             console.log('提交参数--' + JSON.stringify(parmas))
             _this.$ajax

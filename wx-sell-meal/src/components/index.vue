@@ -199,6 +199,7 @@
   import split from './split'
   import store from '../store'
   import articleList from './articleList'
+
   import {
     authPageBaseUri,
     homePage,
@@ -333,7 +334,14 @@
     },
     created() {
       var $this = this
-      // storage.setItem('openId', 'ocWCVwjPuZfp7-jMsbU76-8jU4')
+
+
+      storage.setItem('openId', 'ocWCVwjK_kseL-qYB83YuQYk6l3Q')
+
+
+
+
+
       var getopenid = storage.getItem('openId')
       if (getopenid == null || getopenid == undefined || getopenid == '') {
         console.log('0')
@@ -343,17 +351,16 @@
         var opencode = queryParams.code
         console.log('opencode:' + opencode)
         if (opencode == null || opencode == undefined || opencode == '') {
-          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + 'wxbb0d1ded52245c97' +
-            '&redirect_uri=' +
-            'http://yydc.qiluhospital.com' +
+          window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + wechatAppId +
+            '&redirect_uri=' +homePage+
             '&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
-
+  
         } else {
           console.log('2')
           var _this = this
           let authCode = encryption('wincome', 230)
           let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          let url = _this.api.userApi.GetOpenid
+          let url = _this.api.GetOpenid
           let parmas = {
             authCode: authCode,
             code: opencode,
@@ -440,7 +447,7 @@
       GetPaymentList() {
         if (!storage.getItem('userStatus')) return
         var _this = this
-        let url = this.api.userApi.GetPaymentList
+        let url = this.api.GetPaymentList
         let parmas = defaultParam('', 153)
         _this.$ajax
           .post(url, _this.qs.stringify(parmas))
@@ -464,7 +471,7 @@
       GetNotice() {
         //医院公告和登录无关
         var _this = this
-        let url = this.api.userApi.GetNotice
+        let url = this.api.GetNotice
         // let parmas = defaultParam2('wx_wincome', 101)
         let parmas = {
           authCode: encryption('wx_wincome', 304),
@@ -499,7 +506,7 @@
       GetSetting() {
         if (!storage.getItem('userStatus')) return
         var _this = this
-        let url = this.api.userApi.GetSetting
+        let url = this.api.GetSetting
         let openid = storage.getItem('openId')
         let parmas = defaultParam('', 103)
         _this.$ajax
@@ -530,7 +537,7 @@
           return false
         }
         var _this = this
-        let url = this.api.userApi.GetPatientInfo
+        let url = this.api.GetPatientInfo
         let openid = storage.getItem('openId')
         let parmas = defaultParam('', 102)
         // console.log('提交参数--' + JSON.stringify(parmas))
@@ -564,7 +571,7 @@
       //文章标签
       GetIllness() {
         var _this = this
-        let url = this.api.userApi.GetIllness
+        let url = this.api.GetIllness
         let parmas = {
           authCode: encryption('wx_wincome', 303)
         }
@@ -629,7 +636,7 @@
       //end
       GetActicleList() {
         var _this = this
-        let url = this.api.userApi.GetActicleList
+        let url = this.api.GetActicleList
         let parmas = {
           wexinNo: 'wx_wincome',
           authCode: encryption('wx_wincome', 302),
@@ -665,7 +672,7 @@
       },
       GetModuleList() {
         var _this = this
-        let url = this.api.userApi.GetMainModuleList
+        let url = this.api.GetMainModuleList
         let parmas = defaultParam('wincome', 154)
         _this.$ajax
           .post(url, _this.qs.stringify(parmas))
@@ -684,7 +691,7 @@
       },
       getBanner() {
         var _this = this
-        let url = this.api.userApi.GetBanner
+        let url = this.api.GetBanner
         let parmas = defaultParam2('wx_wincome', 301)
         _this.$ajax
           .post(url, parmas)

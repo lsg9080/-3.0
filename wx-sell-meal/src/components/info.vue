@@ -49,7 +49,7 @@ export default {
     methods: {
         GetPatientInfo() {
             var _this = this
-            let url = this.api.userApi.GetPatientInfo
+            let url = this.api.GetPatientInfo
 			let parmas = defaultParam('', 102)
             console.log('提交参数--' + JSON.stringify(parmas))
             _this.$ajax
@@ -68,7 +68,7 @@ export default {
         },
         UnboundBtn() {
             var _this = this
-            let url = this.api.userApi.BindingDelete
+            let url = this.api.BindingDelete
 			let parmas = defaultParam('', 120)
             console.log('提交参数--' + JSON.stringify(parmas))
             _this.$ajax

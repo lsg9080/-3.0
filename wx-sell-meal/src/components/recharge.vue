@@ -100,7 +100,7 @@
           return
         }
         var _this = this
-        let url = this.api.userApi.GetPrepayid
+        let url = this.api.GetPrepayid
         let weixinNo = storage.getItem('openId')
         let price = parseFloat(rechargeAmount).toFixed(2)
         let authCode = encryptionPay(weixinNo, 230, price)

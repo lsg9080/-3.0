@@ -187,7 +187,7 @@ export default {
         },
         GetDayNutrientInfo() {
             var _this = this
-            let url = this.api.userApi.GetDayNutrientInfo
+            let url = this.api.GetDayNutrientInfo
             let dParam = defaultParam('', 157)
             let addParmas = {
                 patId: this.patId,
@@ -211,7 +211,7 @@ export default {
         },
         shareFriend() {
             var _this = this
-            let url = this.api.userApi.GetSignature
+            let url = this.api.GetSignature
             let authCode = encryption('wx_wincome', 306)
             let params = {
                 authCode: authCode,

@@ -12,15 +12,14 @@ import 'common/stylus/index.styl'
 import VueLazyload from 'vue-lazyload'
 import 'lib-flexible/flexible'
 import md5 from 'js-md5';
-import api from './request/api'
 import axios from './request/http'
 import qs from 'qs'
 //自定义提示框
 import Toast from 'common/js/toast'
 import storage from 'common/js/storage'
-import {urlParse} from 'common/js/util'
-// import vConsole from 'vconsole'
-// Vue.prototype.$vConsole = new vConsole()
+import { urlParse } from 'common/js/util'
+// 调试工具
+import vConsole from 'vconsole'
 
 Vue.use(Toast);//启用新的提示组件
 
@@ -31,36 +30,46 @@ Vue.use(VueLazyload, {
 	loading: require('@/assets/images/timg.jpg'),   //加载的loading过渡图片
 	attempt: 1     // 加载图片数量
 })
-/**
- *  日志输出开关
- */
+
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5;
-Vue.prototype.api = api
-Vue.prototype.$ajax= axios
+Vue.prototype.$ajax = axios
 Vue.prototype.qs = qs
 
-/* eslint-disable no-new */
-new Vue({
-	el: '#app',
-	router,
-	store,
-	template: '<App/>',
-	components: { App }
-})
+
+import getConfigSetApi from './request/api'
+
+// 请求文件内容及创建实例
+async function main() {
+	// 获取配置文件设置api接口地址
+	await getConfigSetApi();
+	// 当配置文件中vConsole=true时，可打开调试工具
+	if (Vue.prototype.vConsole) {
+		Vue.prototype.$vConsole = new vConsole()
+	}
+	// 创建实例
+	new Vue({
+		router,
+		store,
+		render: h => h(App),
+	}).$mount('#app')
+}
+// 方法初始执行
+main();
+
 
 router.beforeEach((to, form, next) => {
 	//debugger
-	if(to.name=='orderFood'||to.name=='orderList'){
+	if (to.name == 'orderFood' || to.name == 'orderList') {
 		// debugger
 		let openid = storage.getItem('openId')
 		let userStatus = storage.getItem('userStatus')
-		if(!openid||!userStatus||userStatus!=true){
-			storage.setItem('callbackUrl',to.fullPath)
+		if (!openid || !userStatus || userStatus != true) {
+			storage.setItem('callbackUrl', to.fullPath)
 			next({
 				path: '/choice', // 未登录则跳转至choice页面
 				// query: {redirect: to.fullPath} // 登陆成功后回到当前页面，这里传值给login页面，to.fullPath为当前点击的页面
-				});
+			});
 			return
 		}
 	}

@@ -74,7 +74,7 @@ export default {
         },
         GetOrderList() {
             var _this = this
-            let url = this.api.userApi.GetOrderList
+            let url = this.api.GetOrderList
             let parmas = defaultParam('', 108)
             _this.$ajax
                 .post(url, _this.qs.stringify(parmas))

@@ -223,7 +223,7 @@
       CheckOrderExist(opthions,payPrice,orderCode,payId) {
         var _this = this
         let mealListArr = this.getSubmitData
-        let url = this.api.userApi.CheckOrderExist
+        let url = this.api.CheckOrderExist
         let dParam = defaultParam('', 161)
         if (_this.radio == '001') {
           var addParmas = {
@@ -293,7 +293,7 @@
         // debugger
         var _this = this
         let mealListArr = this.getSubmitData
-        let url = this.api.userApi.SubmitOrder
+        let url = this.api.SubmitOrder
         let dParam = defaultParam('', 106)
         if (_this.radio == '001') {
           var addParmas = {
@@ -406,7 +406,7 @@
       //微信支付参数
       getwxPaySign(payPrice) {
         var _this = this
-        let url = this.api.userApi.GetPrepayid
+        let url = this.api.GetPrepayid
         let weixinNo = storage.getItem('openId')
         let price = parseFloat(payPrice).toFixed(2)
         let authCode = encryptionPay(weixinNo, 230, price)

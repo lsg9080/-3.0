@@ -26,7 +26,7 @@ export default {
         GetNotice() {
             //医院公告和登录无关
             var _this = this
-            let url = this.api.userApi.GetNotice
+            let url = this.api.GetNotice
             let parmas = {
                 authCode: encryption('wx_wincome', 304),
                 noticeType: 2 //1订餐须知  2 订餐公告

@@ -115,7 +115,7 @@
       //订餐须知
       GetMealsNotice() {
         var _this = this
-        let url = this.api.userApi.GetNotice
+        let url = this.api.GetNotice
         let parmas = {
           authCode: encryption('wx_wincome', 304),
           noticeType: 1 //1订餐须知  2 订餐公告
@@ -152,7 +152,7 @@
           return false
         }
         var _this = this
-        let url = this.api.userApi.BindingPatient
+        let url = this.api.BindingPatient
         let openid = storage.getItem('openId')
         let authCode = encryption(openid, 101)
         let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
@@ -250,7 +250,7 @@
           return
         }
         var _this = this
-        let url = this.api.userApi.GetSmsCode
+        let url = this.api.GetSmsCode
         let openid = storage.getItem('openId')
         let authCode = encryption(openid, 110)
         let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
@@ -290,7 +290,7 @@
         var _this = this
         let authCode = encryption('wincome', 230)
         let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-        let url = _this.api.userApi.GetOpenid
+        let url = _this.api.GetOpenid
         let parmas = {
           authCode: authCode,
           code: queryParams.code,

@@ -19,7 +19,7 @@ module.exports = {
 				}
 			},
 			'/PApi': {
-				target: 'http://192.172.1.50:5003',
+				target: 'http://wincome.f3322.net:5003',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/PApi/': ''
@@ -35,7 +35,7 @@ module.exports = {
 		},
 
 		// Various Dev Server settings
-		host: '192.172.2.140', // can be overwritten by process.env.HOST
+		host: 'localhost', // can be overwritten by process.env.HOST
 		port: 8008, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
 		autoOpenBrowser: false,
 		errorOverlay: true,

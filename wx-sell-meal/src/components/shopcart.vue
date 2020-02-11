@@ -627,8 +627,11 @@ export default {
         pay() {
             if (!this.totalCount || this.totalPrice === 0) {
                 return
-			}
-			if(this.paymentList.length == 1){
+            }
+            console.log(this.paymentList)
+            if(this.paymentList==null||!this.paymentList.length){
+                this.submitOrder()
+            }else if(this.paymentList.length == 1){
 				if(this.paymentList[0].code == '001'){
                     this.CheckOrderExist()
                     return
@@ -664,7 +667,7 @@ export default {
 		},
 		getwxPaySign(payPrice){
 			var _this = this
-            let url = this.api.userApi.GetPrepayid
+            let url = this.api.GetPrepayid
             let weixinNo = storage.getItem('openId')
             let price = parseFloat(payPrice).toFixed(2)
             let authCode = encryptionPay(weixinNo, 230, price)
@@ -765,7 +768,7 @@ export default {
 		CheckOrderExist(opthions){
 			var _this = this
             let mealListArr = this.getSubmitData
-            let url = this.api.userApi.CheckOrderExist
+            let url = this.api.CheckOrderExist
 			let dParam = defaultParam('', 161)
 			if (this.paymentList[0].code == '001') {
                 var addParmas = {
@@ -855,9 +858,9 @@ export default {
             // ]
 			var _this = this
 			let mealListArr = this.getSubmitData
-            let url = this.api.userApi.SubmitOrder
+            let url = this.api.SubmitOrder
 			let dParam = defaultParam('', 106)
-			if (this.paymentList[0].code == '001') {
+			if ((this.paymentList==null||!this.paymentList.length)||(this.paymentList&&this.paymentList[0].code == '001')) {
                 var addParmas = {
                     // mealDate: this.selectFoods[0].mealDate,
                     merchantTradeId: '',
@@ -889,7 +892,7 @@ export default {
                     if (res.data.code == '0') {
                         //成功
 						// console.log(res.data.data)
-						if(this.paymentList[0].code == '001') {
+						if((this.paymentList==null||!this.paymentList.length)||this.paymentList[0].code == '001') {
                             //1、跳页面
 							if(_this.$route.query.id == 1){
 								//今日加餐
@@ -1023,7 +1026,7 @@ export default {
 			// ]
 			var _this = this
 			let dataListArr = this.getAnalysisSubmitData
-            let url = this.api.userApi.GetAllMenuNutrientInfo
+            let url = this.api.GetAllMenuNutrientInfo
             let dParam = defaultParam('', 160)
             let addParmas = {
                 merchantTradeId: '',
