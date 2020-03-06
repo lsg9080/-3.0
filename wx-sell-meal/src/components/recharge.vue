@@ -53,7 +53,7 @@
   } from '../common/js/wechat'
   import {
     wechatAppId
-  } from '../common/js/config'
+  } from '../common/env'
   import storage from '../common/js/storage'
   import '@/common/js/jweixin-1.4.0.js'
   export default {
@@ -100,7 +100,7 @@
           return
         }
         var _this = this
-        let url = this.api.GetPrepayid
+        let url = this.api.userApi.GetPrepayid
         let weixinNo = storage.getItem('openId')
         let price = parseFloat(rechargeAmount).toFixed(2)
         let authCode = encryptionPay(weixinNo, 230, price)

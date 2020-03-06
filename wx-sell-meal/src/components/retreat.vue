@@ -46,7 +46,7 @@ export default {
 		//获取订餐明细
         GetOrderDetail() {
             var _this = this
-            let url = this.api.GetOrderDetail
+            let url = this.api.userApi.GetOrderDetail
             let addParmas = {
 				orderId: _this.$route.query.orderId,   //订单Id
 				mergeMenu: 1   //是否合并菜肴  1:合并   0:不合并
@@ -81,7 +81,7 @@ export default {
             if(repastList.length<=0){
                 this.$myToast.error('请选择要退餐的菜肴')
             }
-            let url = this.api.Retreat
+            let url = this.api.userApi.Retreat
             let addParmas = {
                 orderId: _this.$route.query.orderId, //订单Id
                 repastList : repastList

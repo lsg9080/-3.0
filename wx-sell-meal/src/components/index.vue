@@ -204,7 +204,7 @@
     authPageBaseUri,
     homePage,
     wechatAppId
-  } from '../common/js/config'
+  } from '../common/env'
   import {
     encryption,
     encryptionRechange,
@@ -335,11 +335,8 @@
     created() {
       var $this = this
 
-
-      storage.setItem('openId', 'ocWCVwjK_kseL-qYB83YuQYk6l3Q')
-
-
-
+storage.setItem('openId', 'O8JnqtxRYwIOuoaA1LEik9zGK_k')
+      // storage.setItem('openId', 'ocWCVwjK_kseL-qYB83YuQYk6l3Q')
 
 
       var getopenid = storage.getItem('openId')
@@ -360,7 +357,7 @@
           var _this = this
           let authCode = encryption('wincome', 230)
           let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          let url = _this.api.GetOpenid
+          let url = _this.api.userApi.GetOpenid
           let parmas = {
             authCode: authCode,
             code: opencode,
@@ -414,7 +411,7 @@
       // storage.removeItem('userStatus')
       // console.log(this.openid + '------首页获取到的openid')
       this.GetPatientInfo()
-
+console.log( this.openid )
 
       // switchModel 1：小字 2:大字
       let storageFlag = storage.getItem('switchModel')
@@ -447,7 +444,7 @@
       GetPaymentList() {
         if (!storage.getItem('userStatus')) return
         var _this = this
-        let url = this.api.GetPaymentList
+        let url = this.api.userApi.GetPaymentList
         let parmas = defaultParam('', 153)
         _this.$ajax
           .post(url, _this.qs.stringify(parmas))
@@ -471,7 +468,7 @@
       GetNotice() {
         //医院公告和登录无关
         var _this = this
-        let url = this.api.GetNotice
+        let url = this.api.userApi.GetNotice
         // let parmas = defaultParam2('wx_wincome', 101)
         let parmas = {
           authCode: encryption('wx_wincome', 304),
@@ -506,7 +503,7 @@
       GetSetting() {
         if (!storage.getItem('userStatus')) return
         var _this = this
-        let url = this.api.GetSetting
+        let url = this.api.userApi.GetSetting
         let openid = storage.getItem('openId')
         let parmas = defaultParam('', 103)
         _this.$ajax
@@ -537,7 +534,7 @@
           return false
         }
         var _this = this
-        let url = this.api.GetPatientInfo
+        let url = this.api.userApi.GetPatientInfo
         let openid = storage.getItem('openId')
         let parmas = defaultParam('', 102)
         // console.log('提交参数--' + JSON.stringify(parmas))
@@ -571,7 +568,7 @@
       //文章标签
       GetIllness() {
         var _this = this
-        let url = this.api.GetIllness
+        let url = this.api.userApi.GetIllness
         let parmas = {
           authCode: encryption('wx_wincome', 303)
         }
@@ -636,7 +633,7 @@
       //end
       GetActicleList() {
         var _this = this
-        let url = this.api.GetActicleList
+        let url = this.api.userApi.GetActicleList
         let parmas = {
           wexinNo: 'wx_wincome',
           authCode: encryption('wx_wincome', 302),
@@ -672,7 +669,7 @@
       },
       GetModuleList() {
         var _this = this
-        let url = this.api.GetMainModuleList
+        let url = this.api.userApi.GetMainModuleList
         let parmas = defaultParam('wincome', 154)
         _this.$ajax
           .post(url, _this.qs.stringify(parmas))
@@ -691,7 +688,7 @@
       },
       getBanner() {
         var _this = this
-        let url = this.api.GetBanner
+        let url = this.api.userApi.GetBanner
         let parmas = defaultParam2('wx_wincome', 301)
         _this.$ajax
           .post(url, parmas)

@@ -716,7 +716,7 @@ export default {
         //获取点餐模式模块
         GetModuleList() {
             var _this = this
-            let url = this.api.GetModuleList
+            let url = this.api.userApi.GetModuleList
             let addParmas = { mainId: this.mainId }
             let dParam = defaultParam('', 150)
             let parmas = Object.assign({}, dParam, addParmas)
@@ -769,7 +769,7 @@ export default {
         //获取餐次列表
         GetRepastList() {
             var _this = this
-            let url = this.api.GetRepastList
+            let url = this.api.userApi.GetRepastList
             let addParmas = { moduleId: _this.mealTypeId } //模块Id
             let dParam = defaultParam('', 104)
             let parmas = Object.assign({}, dParam, addParmas)
@@ -802,7 +802,7 @@ export default {
                 index = 0
             }
             var _this = this
-            let url = this.api.GetMenuList
+            let url = this.api.userApi.GetMenuList
             let addParmas = {
                 moduleId: _this.mealTypeId,
                 repastId: _this.mealTimesID

@@ -120,7 +120,7 @@ export default {
     methods: {
         GetOrderDetailList() {
             var _this = this
-            let url = this.api.GetOrderDetailList
+            let url = this.api.userApi.GetOrderDetailList
             let addParmas = { mealDate: _this.mealDate }
             let dParam = defaultParam('', 155)
             let parmas = Object.assign({}, dParam, addParmas)

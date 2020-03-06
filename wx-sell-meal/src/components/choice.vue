@@ -20,7 +20,7 @@
     authPageBaseUri,
     homePage,
     wechatAppId
-  } from '../common/js/config'
+  } from '../common/env'
   import {
     encryption,
     formatDate,
@@ -48,11 +48,10 @@
     },
     mounted() {
       this.RegisterWxJsApi(["scanQRCode"])
-      // console.log('22222----'+window.location.href.split('#')[0])
     },
     methods: {
       RegisterWxJsApi(jsApiList) {
-        let url = this.api.GetSignature
+        let url = this.api.userApi.GetSignature
         let authCode = encryption('wx_wincome', 306)
         let params = {
           authCode: authCode,
@@ -136,7 +135,7 @@
           var _this = this
           let authCode = encryption('wincome', 230)
           let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          let url = _this.api.GetOpenid
+          let url = _this.api.userApi.GetOpenid
           let parmas = {
             authCode: authCode,
             code: _this.code,
@@ -158,7 +157,7 @@
 
       GetPatientName(patNo) {
         var _this = this
-        let url = this.api.GetPatientName
+        let url = this.api.userApi.GetPatientName
         let addParmas = {
           hospitalId: 0,
           patNo: patNo

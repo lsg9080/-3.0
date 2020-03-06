@@ -63,7 +63,7 @@ export default {
         //订餐须知
         GetMealsNotice() {
             var _this = this
-            let url = this.api.GetNotice
+            let url = this.api.userApi.GetNotice
             let parmas = {
                 authCode: encryption('wx_wincome', 304),
                 noticeType: 1 //1订餐须知  2 订餐公告
@@ -86,7 +86,7 @@ export default {
         },
         GetActriclDetails() {
             var _this = this
-            let url = this.api.GetActicleDetails
+            let url = this.api.userApi.GetActicleDetails
             let parmas = {
                 authCode: encryption('wx_wincome', 305),
                 articleID: this.$route.query.id

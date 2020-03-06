@@ -43,7 +43,7 @@ export default {
     methods: {
         GetAccountDetailList() {
             var _this = this
-            let url = this.api.GetAccountDetailList
+            let url = this.api.userApi.GetAccountDetailList
             let openid = storage.getItem('openId')
             let authCode = encryption(openid, 145)
             let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')

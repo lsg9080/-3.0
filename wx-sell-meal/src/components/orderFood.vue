@@ -500,7 +500,7 @@
       //获取支付方式列表
       GetPaymentList() {
         var _this = this
-        let url = this.api.GetPaymentList
+        let url = this.api.userApi.GetPaymentList
         let parmas = defaultParam('', 153)
         _this.$ajax
           .post(url, _this.qs.stringify(parmas))
@@ -568,7 +568,7 @@
       //获取点餐模式模块
       GetModuleList() {
         var _this = this
-        let url = this.api.GetModuleList
+        let url = this.api.userApi.GetModuleList
         let addParmas = {
           mainId: this.mainId
         }
@@ -601,7 +601,7 @@
       //获取订餐公告
       GetMealNoticeCon(id) {
         var _this = this
-        let url = this.api.GetModuleList
+        let url = this.api.userApi.GetModuleList
         let addParmas = {
           mainId: this.mainId
         }
@@ -629,7 +629,7 @@
       //获取餐次列表
       GetRepastList() {
         var _this = this
-        let url = this.api.GetRepastList
+        let url = this.api.userApi.GetRepastList
         let addParmas = {
           moduleId: _this.currentModuleId
         } //模块Id
@@ -680,7 +680,7 @@
       GetMenuList(index) {
         if (!index) index = 0
         var _this = this
-        let url = this.api.GetMenuList
+        let url = this.api.userApi.GetMenuList
         let addParmas = {
           moduleId: _this.currentModuleId,
           repastId: _this.currentRepastId
@@ -866,7 +866,7 @@
         }
 
         var _this = this
-        let url = this.api.GetMenuInfo
+        let url = this.api.userApi.GetMenuInfo
         let dParam = defaultParam('', 156)
         let addParmas = {
           cateringTypeId: food.cateringTypeId,
