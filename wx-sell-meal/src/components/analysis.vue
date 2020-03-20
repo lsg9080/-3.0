@@ -167,14 +167,14 @@ export default {
     methods: {
         moreMeaning() {
             window.open(
-                'https://www.baikemy.com/jiankangkepu/2005208013569',
+                'https://mp.weixin.qq.com/s/Qzn6THF1848bib6HxIh92w',
                 '_blank'
             )
             // window.location.href = 'https://www.baikemy.com/jiankangkepu/2005208013569'
         },
         moreMealMeaning() {
             window.open(
-                'https://mp.weixin.qq.com/s/SflT61omDtY3urxzHuE9Kw',
+                'https://mp.weixin.qq.com/s/aRCwsYmSb5JrHy9P5IhFFQ',
                 '_blank'
             )
         },

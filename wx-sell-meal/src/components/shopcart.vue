@@ -37,9 +37,9 @@
           <div class="list-content">
             <cube-scroll ref="scrollCar" :data="selectFoods">
               <ul v-for="(item,index) in SingleSelectFoods" :key="index">
-                <div class="carTag">{{item.moduleName.replace(/\"/g,'')}}</div>
+                <div class="carTag">{{item.moduleName|replace}}</div>
                 <template v-for="repeatItem in item.repeatList">
-                  <div class="carMealTimes">{{repeatItem.repeatName.replace(/\"/g,'')}}</div>
+                  <div class="carMealTimes">{{repeatItem.repeatName|replace}}</div>
                   <li
                     v-for="(food, foodIndex) in repeatItem.food"
                     :key="food.code+foodIndex"
@@ -61,9 +61,9 @@
               </ul>
               <!-- 套餐 -->
               <ul v-for="item in SetMealSelectFoods">
-                <div class="carTag">{{item.moduleName.replace(/\"/g,'')}}</div>
+                <div class="carTag">{{item.moduleName|replace}}</div>
                 <template v-for="repeatItem in item.repeatList">
-                  <div class="carMealTimes">{{repeatItem.repeatName.replace(/\"/g,'')}}</div>
+                  <div class="carMealTimes">{{repeatItem.repeatName|replace}}</div>
                   <li class="food selMealFood">
                     <span class="name">{{repeatItem.food.name}}</span>
                     <div class="price">
@@ -81,16 +81,19 @@
               </ul>
               <!-- N选M -->
               <ul v-for="item in NMSelectFoods">
-                <div class="carTag">{{item.moduleName.replace(/\"/g,'')}}</div>
+                <div class="carTag">{{item.moduleName|replace}}</div>
                 <template v-for="repeatItem in item.repeatList">
-                  <div
-                    class="carMealTimes NSelectMFoodTimes"
-                  >{{repeatItem.repeatName.replace(/\"/g,'')}}</div>
+                  <div class="carMealTimes NSelectMFoodTimes">{{repeatItem.repeatName|replace}}</div>
                   <template v-for="NMItem in repeatItem.NMList">
                     <div
                       class="carMealTimes carMealTimes2"
-                    >{{NMItem.nmName.replace(/\"/g,'')}}（{{NMItem.menuList[0].N}}选{{NMItem.menuList[0].M}}）</div>
-                    <li v-for="food in NMItem.menuList" class="food selMealFood NSelectMFood">
+                    >（{{NMItem.menuList[0].N}}选{{NMItem.menuList[0].M}}）</div>
+                    <!--注释：不知道为什么要这个，这的作用 提示 N选M {{NMItem.nmName|replace}} -->
+                    <li
+                      v-for="(food,index) in NMItem.menuList"
+                      :key="index"
+                      class="food selMealFood NSelectMFood"
+                    >
                       <span class="name">{{food.name}}</span>
                       <div class="cartcontrol-wrapper">
                         <div class="cartcontrol">
@@ -224,6 +227,7 @@ export default {
       SingleSelectFoods: [] //单选
     };
   },
+  
   computed: {
     newSelectFoods() {
       let singleData = [];
@@ -279,6 +283,11 @@ export default {
             setMealData.push(module);
           }
         } else if (orderingMode == 3) {
+          /**
+           * {moduleName} 如：病人餐
+           *      {repastName} 如:早餐
+           *            {NM}  如：3选1
+           */
           let moduleIdGroup = groupBy(orderingModeGroup[orderingMode], food => {
             return food.moduleName;
           });
@@ -287,25 +296,24 @@ export default {
               moduleName: index,
               repeatList: []
             };
-            // NMData.push({'moduleName':index});
+       
             let repastIdGroup = groupBy(moduleIdGroup[index], food => {
               return food.repastName;
             });
-            for (let index in repastIdGroup) {
+           for (let index in repastIdGroup) {
               let repeat = {
                 repeatName: index,
                 NMList: []
               };
               let NMNameGroup = groupBy(repastIdGroup[index], food => {
-                return food.NMName + food.repastId;
+                return (food.NMName?food.NMName:food.N+'选'+food.M) + food.repastId;
               });
               for (let index in NMNameGroup) {
                 let nm = {
                   nmName: NMNameGroup[index][0].NMName,
                   menuList: NMNameGroup[index]
                 };
-                // debugger
-                // nm.menuList.push()
+             
                 repeat.NMList.push(nm);
               }
               module.repeatList.push(repeat);
@@ -360,7 +368,7 @@ export default {
     },
     totalCount() {
       let count = 0;
-      console.log(count)
+      console.log(count);
       this.selectFoods.forEach(food => {
         count += food.count;
       });
@@ -410,7 +418,8 @@ export default {
     },
     //结算
     payClass() {
-      if (this.totalPrice === 0) {
+      // his计费时菜品可能没有金额 ,所以不用金额判断
+      if (this.totalCount === 0) {
         return "not-enough";
       } else {
         return "enough";
@@ -535,10 +544,15 @@ export default {
     }
   },
   created() {
-    console.log(this.selectFoods)
+    console.log(this.selectFoods);
     this.enableRecharge = storage.getItem("enableRecharge");
   },
-  mounted() {},
+  filters: {
+    replace: function(value) {
+      if (!value) return "";
+      return value.replace(/\"/g, "");
+    }
+  },
   methods: {
     //N选M移除&&套餐移除
     removeFood(food) {
@@ -614,7 +628,10 @@ export default {
      * */
 
     pay() {
-      if (!this.totalCount || this.totalPrice === 0) {
+      if (
+        this.paymentList.length &&
+        (!this.totalCount || this.totalPrice === 0)
+      ) {
         return;
       }
       console.log(this.paymentList);
@@ -659,7 +676,7 @@ export default {
     getwxPaySign(payPrice) {
       var _this = this;
       let url = this.api.userApi.GetPrepayid;
-      let weixinNo = storage.getItem("openId");
+      let weixinNo = storage.getItem("YKOpenId");
       let price = parseFloat(payPrice).toFixed(2);
       let authCode = encryptionPay(weixinNo, 230, price);
       let currentDate = formatDate(new Date(), "yyyyMMddhhmmss");
@@ -765,7 +782,7 @@ export default {
         }
       );
     },
-  
+
     // 检查是否已订餐
     // 点击“去结算“时，先调用"CheckOrderExist"方法，返回0，再正常提交，返回非0，显示提示信息，点击"继续"时提交订单
     CheckOrderExist(opthions) {
@@ -1149,6 +1166,7 @@ export default {
     font-size: 0;
     color: #ff6c42;
     .content-left {
+      display: flex;
       flex: 1;
       .logo-wrapper {
         display: inline-block;
@@ -1498,6 +1516,7 @@ export default {
           background: url(../assets/meal/progress2@2x.png) center center
             no-repeat;
           background-size: 100% 100%;
+          white-space: nowrap;
         }
         &.counter3 {
           color: #ff8361;

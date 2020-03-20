@@ -55,7 +55,7 @@ router.beforeEach((to, form, next) => {
     //debugger
     if (to.name == 'orderFood' || to.name == 'orderList') {
         // debugger
-        let openid = storage.getItem('openId')
+        let openid = storage.getItem("YKOpenId")
         let userStatus = storage.getItem('userStatus')
         if (!openid || !userStatus || userStatus != true) {
             storage.setItem('callbackUrl', to.fullPath)

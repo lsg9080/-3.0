@@ -11,8 +11,8 @@
                         <table width="100%">
                             <tr>
                                 <td></td>
-                                <td class="txt1">订餐截止时间</td>
-                                <td class="txt1">退餐截止时间</td>
+                                <td class="txt1">订餐时间</td>
+                                <td class="txt1">修改时间</td>
                             </tr>
                             <tr v-for="(item, index) in mealNoticeListData" :key="index">
                                 <td class="txt1">{{item.repastName}}</td>

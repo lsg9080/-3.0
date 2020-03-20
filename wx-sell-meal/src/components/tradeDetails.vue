@@ -44,7 +44,7 @@ export default {
         GetAccountDetailList() {
             var _this = this
             let url = this.api.userApi.GetAccountDetailList
-            let openid = storage.getItem('openId')
+            let openid = storage.getItem("YKOpenId")
             let authCode = encryption(openid, 145)
             let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
             let parmas = {

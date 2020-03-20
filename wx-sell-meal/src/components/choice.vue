@@ -51,18 +51,19 @@
     },
     methods: {
       RegisterWxJsApi(jsApiList) {
+        // let url = this.api.userApi.Signature;
         let url = this.api.userApi.GetSignature
         let authCode = encryption('wx_wincome', 306)
         let params = {
           authCode: authCode,
           weixinNo: 'wx_wincome',
           callFrom: 'wincome',
+          callTime:formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss'),
           pageURL: window.location.href.split('#')[0]
         }
         this.$ajax
           .post(url, this.qs.stringify(params))
           .then(res => {
-            console.log(res.data)
             wx.config({
               debug: false,
               appId: res.data.appId, // 必填,公众号的唯一标识
@@ -77,6 +78,7 @@
           })
       },
       Scan() {
+        
         var _this = this
         wx.ready(function() {
           wx.scanQRCode({
@@ -89,11 +91,11 @@
                 _this.GetPatientName(result)
               } else {
                 console.log(res.errMsg)
-                alert('扫描出错，请重新扫描！')
+                _this.$myToast.error('扫描出错，请重新扫描！');
               }
             },
             error: function(data) {
-              alert('扫描出错，请重新扫描！')
+              _this.$myToast.error('扫描出错，请重新扫描！');
             }
           })
           wx.error(function(res) {
@@ -105,7 +107,7 @@
       go() {
         // this.getAuthCode()
         //调式 todo 1
-        // storage.setItem('openId', 'ocWCVwkas3DM6IQhJrpwTonAbTFc')
+        // storage.setItem("YKOpenId", 'ocWCVwkas3DM6IQhJrpwTonAbTFc')
         storage.removeItem('patNo')
         storage.removeItem('patName')
         this.$router.push({
@@ -119,38 +121,7 @@
          * 此页面获取code，然后跳转到login页面，login页面根据code获取openid
          */
         window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.config.appid + '&redirect_uri=' +
-        	this.config.homePage + '&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
-        return;
-        var queryParams = extractQueryParams(window.location.href)
-        this.code = queryParams.code
-        if (this.code == null || this.code === '') {
-          // 如果没有code，则去请求
-          await this.redirectToAuthPageUrl()
-          // var queryParams = extractQueryParams(window.location.href)
-          // // let code = queryParams.code
-          // // let callbackUrl = queryParams.callbackUrl
-          // this.code = queryParams.code
-          // return
-        } else {
-          var _this = this
-          let authCode = encryption('wincome', 230)
-          let callTime = formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss')
-          let url = _this.api.userApi.GetOpenid
-          let parmas = {
-            authCode: authCode,
-            code: _this.code,
-            pageURL: '/choice'
-          }
-          _this.$ajax
-            .post(url, _this.qs.stringify(parmas))
-            .then(res => {
-              console.log('授权后取到的openid' + res.openid)
-              storage.setItem('openId', response.openid)
-            })
-            .catch(function(error) {
-              console.log(error)
-            })
-        }
+        	this.config.homePage + 'login&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
       },
 
 
@@ -183,19 +154,6 @@
           .catch(function(error) {
             console.log(error)
           })
-      },
-
-      redirectToAuthPageUrl() {
-        window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + this.config.appid + '&redirect_uri=' +
-        	this.config.homePage + '&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
-        return
-        // let authParams =
-        //   `?appid=${this.config.appid}&redirect_uri=${homePage}&response_type=${this.config.responseType}&scope=${this.config.scope}&state=${this.config.state}#wechat_redirect`
-        // window.location.href = authPageBaseUri + authParams
-        let url =
-          `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${this.config.appid}&redirect_uri=${homePage}&response_type=${this.config.responseType}&scope=${this.config.scope}&state=${this.config.state}&connect_redirect=1#wechat_redirect`;
-        window.location.replace(url);
-        // window.location.href=url
       }
     },
     beforeRouteEnter(to, from, next) {

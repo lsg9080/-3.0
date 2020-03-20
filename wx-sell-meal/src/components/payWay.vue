@@ -420,7 +420,7 @@ export default {
     getwxPaySign(payPrice) {
       var _this = this;
       let url = this.api.userApi.GetPrepayid;
-      let weixinNo = storage.getItem("openId");
+      let weixinNo = storage.getItem("YKOpenId");
       let price = parseFloat(payPrice).toFixed(2);
       let authCode = encryptionPay(weixinNo, 230, price);
       let currentDate = formatDate(new Date(), "yyyyMMddhhmmss");

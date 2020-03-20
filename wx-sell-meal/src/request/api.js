@@ -22,6 +22,7 @@ const userApi = {
     GetNotice: SApi + '/api/WeChat/GetNotice', //获取医院公告
     GetOpenid: webApi + '/api/Patient/GetOpenid', //获取GetOpenid
     GetSignature: webApi + '/api/Patient/GetSignature', //获取微信JSSDK签名
+    // Signature: webApi + '/api/Patient/Signature',
     GetSmsCode: PApi + '/api/PatientMeal/GetSmsCode', //获取短信验证码
     BindingPatient: PApi + '/api/PatientMeal/BindingPatient', //病人信息绑定
     GetPatientInfo: PApi + '/api/PatientMeal/GetPatientInfo', //查询病人信息

@@ -57,7 +57,7 @@
 							v-for="(meal, mealIndex) in item.menuList"
 							:key="mealIndex"
 						>
-							<div>{{ meal.name }}</div>
+							<div style="flex:1">{{ meal.name }}</div>
 							<div class="mealP">
 								<meal-radio
 									:meal="meal"
@@ -243,6 +243,7 @@ export default {
             var _this = this
             let url = this.api.userApi.GetOrderDetail
             let addParmas = {
+                pageFrom:'evaluation',
                 orderId: _this.orderId, //订单Id
                 mergeMenu: 0 //是否合并菜肴  1:合并   0:不合并
             }
@@ -409,7 +410,8 @@ textarea::placeholder {
             .tit {
                 font-size: 16px;
                 color: #505050;
-                padding-right: 30px;
+                width: 2.2rem;
+                // padding-right: 20px;
             }
         }
     }
@@ -485,43 +487,5 @@ textarea::placeholder {
         }
     }
 }
-.rate {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 24px;
-}
-.comment {
-    font-size: 14px;
-    color: #aaaaaa;
-    padding-left: 11px;
-    &.on1 {
-        color: #ffd149;
-    }
-    &.on2 {
-        color: #ff8361;
-    }
-}
-.StarsWrap {
-    overflow: hidden;
-    .li {
-        float: left;
-        margin: 0;
-        margin-right: 11px;
-        i {
-            display: block;
-            font-size: 24px;
-            color: #ededed;
-            &.on1 {
-                color: #aaaaaa;
-            }
-            &.on2 {
-                color: #ffd149;
-            }
-            &.on3 {
-                color: #ff8361;
-            }
-        }
-    }
-}
+
 </style>

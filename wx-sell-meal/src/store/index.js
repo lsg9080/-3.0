@@ -7,19 +7,20 @@ import getters from './getters'
 Vue.use(Vuex);
 
 const state = {
-	fold: false,
-	showLoading: false,
-	payWayShow: false,
-	resultsShow: false,
-	isLogin: false,
-	car: [],
-	getAnalysisData: JSON.parse(sessionStorage.getItem('getAnalysisData')) || {},  //全天营养素分析结果
-	getNutritionEducation: '了解你的饮食注意事项'
+    fold: false,
+    showLoading: false,
+    payWayShow: false,
+    resultsShow: false,
+    isLogin: false,
+    car: [],
+    getAnalysisData: JSON.parse(sessionStorage.getItem('getAnalysisData')) || {}, //全天营养素分析结果
+    getNutritionEducation: '了解你的饮食注意事项',
+    setting: []
 };
 
 export default new Vuex.Store({
-	state,
-	getters,
-	actions,
-	mutations,
+    state,
+    getters,
+    actions,
+    mutations,
 })

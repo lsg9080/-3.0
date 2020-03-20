@@ -80,7 +80,7 @@ export default {
 						storage.setObjItem('mycar2',[])
                         this.$myToast.success(resp.data.msg)
 						storage.removeItem('userStatus')
-						// storage.removeItem('openId')
+						// storage.removeItem("YKOpenId")
                         this.$store.commit('changeIsLogin', false)
                         setTimeout(() => {
                             this.$router.push({

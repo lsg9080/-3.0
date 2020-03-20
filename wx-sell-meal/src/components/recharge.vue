@@ -101,7 +101,7 @@
         }
         var _this = this
         let url = this.api.userApi.GetPrepayid
-        let weixinNo = storage.getItem('openId')
+        let weixinNo = storage.getItem("YKOpenId")
         let price = parseFloat(rechargeAmount).toFixed(2)
         let authCode = encryptionPay(weixinNo, 230, price)
         let currentDate = formatDate(new Date(), 'yyyyMMddhhmmss')
