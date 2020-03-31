@@ -1,0 +1,8 @@
+{
+    "homePage": "http://weixin.wincome.group/",
+    "wechatAppId": "wx99fcb86f4cb3700a",
+    "webApi": "http://demobrc.wincome.group/patientOrderingNew.api",
+    "SApi": "http://demobrc.wincome.group/WeChatAPI_New",
+    "PApi": "http://192.172.1.50:5003",
+    "vConsole": false
+}
